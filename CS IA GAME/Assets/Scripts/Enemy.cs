@@ -1,36 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
 
-    public int maxHealth = 100;
+    static public int maxHealth = 100;
     public int currentHealth;
     public int points = 10;
+    static public int damageTaken = 10;
     int gameOverCount;
 
-    void setHealth(int health)
-    {
-        maxHealth -= health;
-        currentHealth = maxHealth;
-    }
+    bool adjustFlag = false;
 
     void Start()
     {
         gameOverCount = FindObjectOfType<GameManager>().getGameOverCount();
+        adjustFlag = false;
 
-        if (gameOverCount <= 2)
+        if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag == true)
         {
-            setHealth(0);
+            currentHealth = maxHealth;
         }
-        else if (gameOverCount >= 3 && gameOverCount <= 6)
+        else if (adjustFlag == false)
         {
-            setHealth(10);
-        }
-        else if (gameOverCount > 6)
-        {
-            setHealth(20);
+            maxHealth -= Convert.ToInt32(maxHealth * 0.2);
+            currentHealth = maxHealth;
+            adjustFlag = true;
         }
     }
 
@@ -38,17 +33,14 @@ public class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("BProjectile"))
         {
-            if (gameOverCount <= 2)
+            if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag == true)
             {
-                TakeDamage(5);
+                TakeDamage(damageTaken);
             }
-            else if (gameOverCount >= 3 && gameOverCount <= 6)
+            else if (adjustFlag == false)
             {
-                TakeDamage(10);
-            }
-            else if (gameOverCount > 6)
-            {
-                TakeDamage(20);
+                damageTaken += Convert.ToInt32(damageTaken * 0.5);
+                TakeDamage(damageTaken);
             }
         }
     }

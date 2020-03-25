@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using UnityEngine;
 
 public class BallieHealth : MonoBehaviour
@@ -7,65 +7,46 @@ public class BallieHealth : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
 
-    public int regularDamage = 15;
-    public int ladyBugDamage = 20;
+    static public int regularDamage = 10;
+    public int ladyBugDamage = 15;
     int gameOverCount;
 
-    void setRegularDamage(int damage)
-    {
-        regularDamage -= damage;
-    }
-
-    void setLadyBugDamage(int damage)
-    {
-        ladyBugDamage -= damage;
-    }
+    bool adjustFlag = false;
 
     // Start is called before the first frame update
     void Start()
     {
-
         currentHealth = maxHealth;
         gameOverCount = FindObjectOfType<GameManager>().getGameOverCount();
-
+        adjustFlag = false;
     }
-
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
-            if (gameOverCount <= 2)
+            if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag == true)
             {
-                setRegularDamage(0);
                 TakeDamage(regularDamage);
             }
-            else if (gameOverCount >= 3 && gameOverCount <= 6)
+            else if (adjustFlag == false)
             {
-                setRegularDamage(5);
+                regularDamage -= Convert.ToInt32(regularDamage * 0.2);
                 TakeDamage(regularDamage);
-            }
-            else if (gameOverCount > 6)
-            {
-                setRegularDamage(10);
-                TakeDamage(regularDamage);
+                adjustFlag = true;
             }
         }
-        if (collision.CompareTag("LadyBug")){
-            if (gameOverCount <= 2)
+        if (collision.CompareTag("LadyBug"))
+        {
+            if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag == true)
             {
-                setLadyBugDamage(0);
                 TakeDamage(ladyBugDamage);
             }
-            else if (gameOverCount >= 3 && gameOverCount <= 6)
+            else if (adjustFlag == false)
             {
-                setLadyBugDamage(5);
+                ladyBugDamage -= Convert.ToInt32(ladyBugDamage * 0.2);
                 TakeDamage(ladyBugDamage);
-            }
-            else if (gameOverCount > 6)
-            {
-                setLadyBugDamage(10);
-                TakeDamage(ladyBugDamage);
+                adjustFlag = true;
             }
         }
     }
@@ -78,6 +59,5 @@ public class BallieHealth : MonoBehaviour
             FindObjectOfType<GameManager>().GameOver();
         }
     }
-
 }
 

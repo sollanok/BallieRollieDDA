@@ -3468,6 +3468,16 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3019167831853587025, guid: 751b03b6430d4440fb33f664fd55a242,
+        type: 3}
+      propertyPath: regularDamage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019167831853587025, guid: 751b03b6430d4440fb33f664fd55a242,
+        type: 3}
+      propertyPath: ladyBugDamage
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3019167831853587053, guid: 751b03b6430d4440fb33f664fd55a242,
         type: 3}
       propertyPath: m_Offset.x
@@ -11587,6 +11597,11 @@ PrefabInstance:
     - target: {fileID: 3704593635516640446, guid: d7bcc0dc9770e468eaaf57dde7c28bd6,
         type: 3}
       propertyPath: score
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3704593635516640446, guid: d7bcc0dc9770e468eaaf57dde7c28bd6,
+        type: 3}
+      propertyPath: points
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -9,11 +9,6 @@ public class Score : MonoBehaviour
     public Text ScoreText;
     public int score;
 
-    public int getScore()
-    {
-        return score;
-    }
-
     public void setScore(int points)
     {
         score += points;

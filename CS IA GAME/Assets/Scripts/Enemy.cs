@@ -4,7 +4,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    static public int maxHealth = 100;
+    static public int maxHealth = 50;
     public int currentHealth;
     public int points = 10;
     static public int damageTaken = 10;
@@ -17,11 +17,11 @@ public class Enemy : MonoBehaviour
         gameOverCount = FindObjectOfType<GameManager>().getGameOverCount();
         adjustFlag = false;
 
-        if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag == true)
+        if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
         {
             currentHealth = maxHealth;
         }
-        else if (adjustFlag == false)
+        else if (!adjustFlag)
         {
             maxHealth -= Convert.ToInt32(maxHealth * 0.2);
             currentHealth = maxHealth;
@@ -33,11 +33,11 @@ public class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("BProjectile"))
         {
-            if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag == true)
+            if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
             {
                 TakeDamage(damageTaken);
             }
-            else if (adjustFlag == false)
+            else if (!adjustFlag)
             {
                 damageTaken += Convert.ToInt32(damageTaken * 0.5);
                 TakeDamage(damageTaken);

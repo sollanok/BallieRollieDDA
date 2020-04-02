@@ -1,26 +1,24 @@
 ﻿using UnityEngine;
 using Pathfinding;
+using System;
 
 public class Enemy4AI : MonoBehaviour
 {
 
     public Transform target;
-    public float speed = 200f; // This would change with player failure
+    static public float speed = 200f;
     public float toNextWaypoint = 3f;
 
     Path path;
     int currentWaypoint;
     bool endOfPath = false;
 
+    bool adjustFlag = false;
+
     Seeker seeker;
     Rigidbody2D rb;
 
     int gameOverCount;
-
-    void setSpeed(float quantity)
-    {
-        speed -= quantity;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +26,7 @@ public class Enemy4AI : MonoBehaviour
         gameOverCount = FindObjectOfType<GameManager>().getGameOverCount();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        adjustFlag = false;
 
         InvokeRepeating("UpdatePath", 0f, 0.5f);
 
@@ -66,18 +65,11 @@ public class Enemy4AI : MonoBehaviour
         {
             endOfPath = false;
         }
-  
-        if (gameOverCount <= 2)
+
+        if (gameOverCount % 3 == 0 && gameOverCount != 0 && !adjustFlag)
         {
-            setSpeed(0);
-        }
-        else if (gameOverCount >= 3 && gameOverCount <= 6)
-        {
-            setSpeed(0.5f);
-        }
-        else if (gameOverCount > 6)
-        {
-            setSpeed(10f);
+            speed -= Convert.ToInt32(speed * 0.02);
+            adjustFlag = true;
         }
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] -
@@ -94,7 +86,6 @@ public class Enemy4AI : MonoBehaviour
         {
             currentWaypoint++;
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

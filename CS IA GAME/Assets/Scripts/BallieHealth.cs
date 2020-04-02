@@ -25,11 +25,11 @@ public class BallieHealth : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag == true)
+            if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
             {
                 TakeDamage(regularDamage);
             }
-            else if (adjustFlag == false)
+            else if (!adjustFlag)
             {
                 regularDamage -= Convert.ToInt32(regularDamage * 0.2);
                 TakeDamage(regularDamage);
@@ -38,14 +38,31 @@ public class BallieHealth : MonoBehaviour
         }
         if (collision.CompareTag("LadyBug"))
         {
-            if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag == true)
+            if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
             {
                 TakeDamage(ladyBugDamage);
             }
-            else if (adjustFlag == false)
+            else if (!adjustFlag)
             {
                 ladyBugDamage -= Convert.ToInt32(ladyBugDamage * 0.2);
                 TakeDamage(ladyBugDamage);
+                adjustFlag = true;
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
+            {
+                TakeDamage(regularDamage);
+            }
+            else if (!adjustFlag)
+            {
+                regularDamage -= Convert.ToInt32(regularDamage * 0.2);
+                TakeDamage(regularDamage);
                 adjustFlag = true;
             }
         }

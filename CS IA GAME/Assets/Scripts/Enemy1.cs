@@ -3,38 +3,30 @@
 public class Enemy1 : MonoBehaviour
 {
 
-    float startTimeBewtweenShots = 2f;
+    static float startTimeBewtweenShots = 2f;
     float timeBetweenShots;
     int gameOverCount;
 
     public GameObject projectile;
 
-    void setTime(float time)
-    {
-        startTimeBewtweenShots += time;
-        timeBetweenShots += time;
-    }
-
+    bool adjustFlag = false;
 
     // Start is called before the first frame update
     public void Start()
     {
-
         gameOverCount = FindObjectOfType<GameManager>().getGameOverCount();
+        adjustFlag = false;
 
-        if (gameOverCount <= 2)
+        if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
         {
             timeBetweenShots = startTimeBewtweenShots;
         }
-        else if (gameOverCount >= 3 && gameOverCount <= 6)
+        else if (!adjustFlag)
         {
-            setTime(1f);
+            startTimeBewtweenShots += 1f;
+            timeBetweenShots = startTimeBewtweenShots;
+            adjustFlag = true;
         }
-        else if (gameOverCount > 6)
-        {
-            setTime(2f);
-        }
-
     }
 
     // Update is called once per frame
@@ -55,3 +47,4 @@ public class Enemy1 : MonoBehaviour
 
     }
 }
+

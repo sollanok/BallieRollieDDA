@@ -5,14 +5,14 @@ public class Timer : MonoBehaviour
 {
 
     public Text TimerText;
-    float startTime;
-
+    float startTime = 0;
+    float currentTime = 0;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        startTime = Time.time * Time.deltaTime;
+        startTime = Time.timeSinceLevelLoad * Time.deltaTime;
 
     }
 
@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour
     void Update()
     {
 
-        float currentTime = Time.time - startTime;
+        currentTime = Time.timeSinceLevelLoad - startTime;
 
         string minutes = ((int)currentTime / 60).ToString();
         string seconds = ((int)currentTime % 60).ToString();

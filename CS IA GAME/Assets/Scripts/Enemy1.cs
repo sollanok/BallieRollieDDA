@@ -20,12 +20,14 @@ public class Enemy1 : MonoBehaviour
         if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
         {
             timeBetweenShots = startTimeBewtweenShots;
+            //Debug.Log("Enemy 1: Time Between Shots " + startTimeBewtweenShots);
         }
         else if (!adjustFlag)
         {
             startTimeBewtweenShots += 1f;
             timeBetweenShots = startTimeBewtweenShots;
             adjustFlag = true;
+            //Debug.Log("Enemy 1: Time Between Shots " + startTimeBewtweenShots);
         }
     }
 

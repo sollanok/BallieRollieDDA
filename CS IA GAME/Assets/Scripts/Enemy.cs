@@ -20,12 +20,14 @@ public class Enemy : MonoBehaviour
         if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
         {
             currentHealth = maxHealth;
+            //Debug.Log("Current enemy health: " + currentHealth);
         }
         else if (!adjustFlag)
         {
             maxHealth -= Convert.ToInt32(maxHealth * 0.2);
             currentHealth = maxHealth;
             adjustFlag = true;
+            //Debug.Log("Current enemy health: " + currentHealth);
         }
     }
 
@@ -33,15 +35,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("BProjectile"))
         {
-            if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
-            {
-                TakeDamage(damageTaken);
-            }
-            else if (!adjustFlag)
-            {
-                damageTaken += Convert.ToInt32(damageTaken * 0.5);
-                TakeDamage(damageTaken);
-            }
+            TakeDamage(damageTaken);
         }
     }
 

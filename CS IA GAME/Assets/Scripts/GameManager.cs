@@ -39,5 +39,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameOverCount++;
+        Screen.fullScreen = false;
+        Debug.Log("Game over counter " + gameOverCount);
     }
 }

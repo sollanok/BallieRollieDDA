@@ -70,6 +70,11 @@ public class Enemy4AI : MonoBehaviour
         {
             speed -= Convert.ToInt32(speed * 0.02);
             adjustFlag = true;
+            //Debug.Log("Ladybug: speed of flight " + speed);
+        }
+        else
+        {
+            //Debug.Log("Ladybug: speed of flight " + speed);
         }
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] -

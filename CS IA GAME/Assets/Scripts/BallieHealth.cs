@@ -8,7 +8,7 @@ public class BallieHealth : MonoBehaviour
     public int currentHealth;
 
     static public int regularDamage = 10;
-    public int ladyBugDamage = 15;
+    static public int ladyBugDamage = 15;
     int gameOverCount;
 
     bool adjustFlag = false;
@@ -19,6 +19,7 @@ public class BallieHealth : MonoBehaviour
         currentHealth = maxHealth;
         gameOverCount = FindObjectOfType<GameManager>().getGameOverCount();
         adjustFlag = false;
+        Screen.fullScreen = false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -28,12 +29,14 @@ public class BallieHealth : MonoBehaviour
             if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
             {
                 TakeDamage(regularDamage);
+                //Debug.Log("Enemy damage taken: " + regularDamage);
             }
             else if (!adjustFlag)
             {
                 regularDamage -= Convert.ToInt32(regularDamage * 0.2);
                 TakeDamage(regularDamage);
                 adjustFlag = true;
+                //Debug.Log("Enemy damage taken: " + regularDamage);
             }
         }
         if (collision.CompareTag("LadyBug"))
@@ -41,12 +44,14 @@ public class BallieHealth : MonoBehaviour
             if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
             {
                 TakeDamage(ladyBugDamage);
+                //Debug.Log("Enemy damage taken: " + ladyBugDamage);
             }
             else if (!adjustFlag)
             {
                 ladyBugDamage -= Convert.ToInt32(ladyBugDamage * 0.2);
                 TakeDamage(ladyBugDamage);
                 adjustFlag = true;
+                //Debug.Log("Enemy damage taken: " + ladyBugDamage);
             }
         }
     }
@@ -58,12 +63,14 @@ public class BallieHealth : MonoBehaviour
             if (gameOverCount % 3 != 0 || gameOverCount == 0 || adjustFlag)
             {
                 TakeDamage(regularDamage);
+                //Debug.Log("Enemy damage taken: " + regularDamage);
             }
             else if (!adjustFlag)
             {
                 regularDamage -= Convert.ToInt32(regularDamage * 0.2);
                 TakeDamage(regularDamage);
                 adjustFlag = true;
+                //Debug.Log("Enemy damage taken: " + regularDamage);
             }
         }
     }

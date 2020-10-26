@@ -1,4 +1,4 @@
-# Ballie Rollie - Dynamic Difficulty Adjustment Game
+# Ballie Rollie - Game with Dynamic Difficulty Adjustment
 ## 
 
 ## File structure
